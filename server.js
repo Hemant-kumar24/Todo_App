@@ -6,10 +6,11 @@ const connectDB=require("./src/config/db")
 const cookieParser=require("cookie-parser")
 const session = require('express-session');
 app.use(cookieParser())
-
+const userRoute=require("./src/routes/userRoute")
 connectDB();
 app.use(express.json());
 app.use("/api/todos",todoRoute);
+app.use("/api/users",userRoute)
 app.get('/set-cookie',(req,res)=>{
     res.cookie("name","user-1");
     res.send("cookie set")
@@ -40,5 +41,5 @@ app.get("/logout",(req,res)=>{
 })
 
 app.listen(port,()=>{
-    console.log(`server is running on ${port}`);
+    console.log(`server is running on ${port}`); 
 })
